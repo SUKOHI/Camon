@@ -3,7 +3,7 @@ Camon
 
 A PHP package mainly developed for Laravel to generate icon fonts like font-awesome, glyphicons, ionicons and octicions.
 
-Installation&setting
+Installation&setting for Laravel
 ====
 
 After installation using composer, add the followings to the array in  app/config/app.php
