@@ -2,94 +2,164 @@
 
 class Camon {
 	
-	var $tag = 'i';
+	private $_tag = 'i';
+	private $_type, $_name, $_space = '';
+	private $_params = array();
 	
-	public function __construct($tag='') {
+	public function __toString() {
 		
-		if(!empty($tag)) {
-			
-			$this->setTag($tag);
-			
-		}
+		return $this->generate($this->_type, $this->_name, $this->_params);
 		
 	}
 	
-	public function setTag($tag) {
+	public function id($id) {
 		
-		$this->tag = $tag;
+		$this->_params['id'] = $id;
+		return $this;
 		
 	}
 	
-	public static function test() {
+	public function css($css) {
 		
-		return 'OK';
+		$this->_params['class'] = $css;
+		return $this;
+		
+	}
+	
+	public function tag($tag) {
+		
+		$this->_tag = $tag;
+		return $this;
+		
+	}
+	
+	public function space($mode='') {
+		
+		$this->_space = $mode;
+		return $this;
 		
 	}
 	
 	public function fontawesome($name, $params=array(), $after_spacing=true) {
 		
-		return $this->get('fontawesome', $name, $params, $after_spacing);
+		$this->setParams('fontawesome', $name, $params, $after_spacing);
+		return $this;
+		
+	}
+	
+	public function FA($name, $params=array(), $after_spacing=true) {
+		
+		return $this->fontawesome($name, $params, $after_spacing);
 		
 	}
 
 	public function glyphicon($name, $params=array(), $after_spacing=true) {
 	
-		return $this->get('glyphicon', $name, $params, $after_spacing);
+		$this->setParams('glyphicon', $name, $params, $after_spacing);
+		return $this;
 	
+	}
+	
+	public function GL($name, $params=array(), $after_spacing=true) {
+		
+		return $this->glyphicon($name, $params, $after_spacing);
+		
 	}
 
 	public function ionicon($name, $params=array(), $after_spacing=true) {
 	
-		return $this->get('ionicon', $name, $params, $after_spacing);
+		$this->setParams('ionicon', $name, $params, $after_spacing);
+		return $this;
 	
+	}
+	
+	public function ION($name, $params=array(), $after_spacing=true) {
+		
+		return $this->ionicon($name, $params, $after_spacing);
+		
 	}
 
 	public function octicon($name, $params=array(), $after_spacing=true) {
 	
-		return $this->get('octicon', $name, $params, $after_spacing);
+		$this->setParams('octicon', $name, $params, $after_spacing);
+		return $this;
 	
 	}
 	
-	public function get($type, $name, $params, $after_spacing) {
+	public function OCT($name, $params=array(), $after_spacing=true) {
 		
-		$tag = (isset($params['tag'])) ? $params['tag'] : $this->tag;
-		$class = (isset($params['class'])) ? $params['class'] .' ' : '';
-		$space = ($after_spacing) ? ' ' : '';
+		return $this->octicon($name, $params, $after_spacing);
+		
+	}
+	
+	public function generate($type, $name, $params) {
+		
+		$icon_class = '';
 		
 		switch($type) {
 			
 			case 'fontawesome':
-				$class .= 'fa fa-'. $name;
+				$icon_class = 'fa fa-'. $name;
 				break;
 				
 			case 'glyphicon':
-				$class .= 'glyphicon glyphicon-'. $name;
+				$icon_class = 'glyphicon glyphicon-'. $name;
 				break;
 				
 			case 'ionicon':
-				$class .= 'ion-'. $name;
+				$icon_class = 'ion-'. $name;
 				break;
 				
 			case 'octicon':
-				$class .= 'octicon octicon-'. $name;
+				$icon_class = 'octicon octicon-'. $name;
 				break;
 			
 		}
 		
-		return '<'. $tag .' class="'. $class .'"'. $this->property($params) .'></'. $tag .'>'. $space;
+		$params['class'] = (!empty($params['class'])) ? $params['class'] .' '. $icon_class : $icon_class;
+		$tag = '<'. $this->_tag . $this->property($params) .'></'. $this->_tag .'>';
+		
+		switch ($this->_space) {
+			
+			case 'left':
+				$tag = ''. $tag;
+				break;
+				
+			case 'right':
+				$tag = $tag .' ';
+				break;
+				
+			case 'both':
+				$tag = ' '. $tag .' ';
+				break;
+			
+		}
+		
+		$this->resetParams();
+		return $tag;
+		
+	}
+	
+	private function setParams($type, $name, $params, $after_spacing) {
+		
+		$this->_type = $type;
+		$this->_name = $name;
+		$this->_params = $params;
+		$this->_space = ($after_spacing) ? 'right' : '';
+		
+	}
+	
+	private function resetParams() {
+		
+		$this->_tag = 'i';
+		$this->_type = $this->_name = $this->_space = '';
+		$this->_params = array();
 		
 	}
 	
 	private function property($params) {
 		
 		$return = '';
-		
-		if(isset($params['class'])) {
-			
-			unset($params['class']);
-			
-		}
-		
 		if(empty($params)) $return;
 		
 		foreach ($params as $key => $value) {
@@ -102,37 +172,87 @@ class Camon {
 		
 	}
 	
+	public static function cdn($icon, $version='', $tag=true) {
+		
+		$url = '';
+		
+		switch ($icon) {
+			
+			case 'fontawesome':
+				if(empty($version)) $version = '4.2.0';
+				$url = '//maxcdn.bootstrapcdn.com/font-awesome/'. $version .'/css/font-awesome.min.css';
+				break;
+			
+			case 'glyphicon':
+				if(empty($version)) $version = '3.0.0';
+				$url = '//netdna.bootstrapcdn.com/bootstrap/'. $version .'/css/bootstrap-glyphicons.css';
+				break;
+			
+			case 'ionicon':
+				if(empty($version)) $version = '1.5.2';
+				$url = '//code.ionicframework.com/ionicons/'. $version .'/css/ionicons.min.css';
+				break;
+			
+			case 'octicon':
+				if(empty($version)) $version = '2.1.2';
+				$url = '//cdnjs.cloudflare.com/ajax/libs/octicons/'. $version .'/octicons.css';
+				break;
+				
+		}
+		
+		if(!$tag) {
+			
+			return $url;
+			
+		}
+		
+		return '<link href="'. $url .'" rel="stylesheet">';
+		
+	}
+	
 }
 
 /*** Examples
 
-	// Simple way
+	// Basic ways
 	
-	$camon = new Camon();
-	echo $camon->fontawesome('search');
-	echo $camon->glyphicon('search');
-	echo $camon->ionicon('search');
-	echo $camon->octicon('search');
+	echo Camon::fontawesome('search');
+	echo Camon::glyphicon('search');
+	echo Camon::ionicon('search');
+	echo Camon::octicon('search');
 	
-	// Additional way
+	// Arias ways
 	
-	$camon = new Camon('span');							// You can chage the tag.(Default: i tag)
-	$camon->setTag('span');								// You can chage the tag after generating an instance.
+	echo Camon::FA('search');	// fontawesome('search')
+	echo Camon::GL('search');	// glyphicon('search')
+	echo Camon::ION('search');	// ionicon('search')
+	echo Camon::OCT('search');	// octicon('search')
 	
-	echo $camon->fontawesome('search', array(			// with additional class
+	// Additional ways
+	
+	echo Camon::fontawesome('search')->tag('span');		// changing tag to span
+	
+	echo Camon::fontawesome('search', array(			// with additional class
 		'class' => 'text-success'
 	));
 	
-	echo $camon->glyphicon('search', array(				// with additional id
+	echo Camon::glyphicon('search', array(				// with additional id
 		'id' => 'glyphicon'
 	));
 	
-	echo $camon->ionicon('search', array(), false);		// disabled after-spacing
+	echo Camon::ionicon('search', array(), false);		// disabled after-spacing
 	
-	echo $camon->octicon('search', array(				// with all
+	echo Camon::octicon('search', array(				// with all
 		'id' => 'glyphicon', 
 		'class' => 'text-success'
 	), false);
+			
+	// CDN
+
+	echo Camon::cdn('fontawesome');
+	echo Camon::cdn('glyphicon', $version = '3.0.0');
+	echo Camon::cdn('ionicon', $version = '1.5.2', $tag = true);
+	echo Camon::cdn('octicon', $version = '2.1.2', $tag = false);	// URL
 	
 	
 	// If you'd like to find specific icons, the following page is really useful!
