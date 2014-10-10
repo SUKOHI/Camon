@@ -66,8 +66,8 @@ Usage
 
     echo Camon::cdn('fontawesome');
     echo Camon::cdn('glyphicon', $version = '3.0.0');
-    echo Camon::cdn('ionicon', $version = '1.5.2', $tag = true);
-    echo Camon::cdn('octicon', $version = '2.1.2', $tag = false);	// Only URL
+    echo Camon::cdn('ionicons', $version = '1.5.2', $tag = true);
+    echo Camon::cdn('octicons', $version = '2.1.2', $tag = false);	// Only URL
 
 **Search icon**
 

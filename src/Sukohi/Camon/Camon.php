@@ -188,12 +188,12 @@ class Camon {
 				$url = '//netdna.bootstrapcdn.com/bootstrap/'. $version .'/css/bootstrap-glyphicons.css';
 				break;
 			
-			case 'ionicon':
+			case 'ionicons':
 				if(empty($version)) $version = '1.5.2';
 				$url = '//code.ionicframework.com/ionicons/'. $version .'/css/ionicons.min.css';
 				break;
 			
-			case 'octicon':
+			case 'octicons':
 				if(empty($version)) $version = '2.1.2';
 				$url = '//cdnjs.cloudflare.com/ajax/libs/octicons/'. $version .'/octicons.css';
 				break;
