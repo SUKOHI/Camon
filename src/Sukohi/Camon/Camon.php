@@ -183,7 +183,7 @@ class Camon {
 				$url = '//maxcdn.bootstrapcdn.com/font-awesome/'. $version .'/css/font-awesome.min.css';
 				break;
 			
-			case 'glyphicon':
+			case 'glyphicons':
 				if(empty($version)) $version = '3.0.0';
 				$url = '//netdna.bootstrapcdn.com/bootstrap/'. $version .'/css/bootstrap-glyphicons.css';
 				break;
