@@ -1,75 +1,115 @@
 Camon
 =====
 
-A PHP package mainly developed for Laravel to generate icon fonts like font-awesome, glyphicons, ionicons and octicions.
+A PHP package mainly developed for Laravel to generate icon fonts like the below.  
+(This is for Laravel 4.2. [For Laravel 5+](https://github.com/SUKOHI/Camon))
 
-Installation&setting for Laravel
+* [Font-Awesome](http://fortawesome.github.io/Font-Awesome/)
+* [Glyphicons](http://glyphicons.com/)
+* [Ionicons](http://ionicons.com/)
+* [Octicons](https://octicons.github.com/)
+* [Foundation](http://zurb.com/playground/foundation-icon-fonts-3)
+* [Material Icons](http://google.github.io/material-design-icons/)
+
+![Imgur](http://i.imgur.com/FTOCIwy.png)
+
+Installation
 ====
 
-After installation using composer, add the followings to the array in  app/config/app.php
+Add this package name in composer.json
 
-    'providers' => array(  
+    "require": {
+      "sukohi/camon": "1.*"
+    }
+
+Execute composer command.
+
+    composer update
+
+Register the service provider in app.php
+
+    'providers' => [
         ...Others...,  
-        'Sukohi\Camon\CamonServiceProvider', 
-    )
+        'Sukohi\Camon\CamonServiceProvider',
+    ]
 
-Also
+Also alias
 
-    'aliases' => array(  
+    'aliases' => [
         ...Others...,  
         'Camon' => 'Sukohi\Camon\Facades\Camon',
-    )
+    ]
 
 Usage
 ====
 
-**Basic**
+    // Font-Awesome
+    echo Camon::FA('home');
+    
+    // Glyphicons
+    echo Camon::GL('home');
+    
+    // Ionicons
+    echo Camon::ION('home');
+    
+    // Octicons
+    echo Camon::OCT('home');
+    
+    // Foundation
+    echo Camon::FI('home');
+    
+    // Material Icons
+    echo Camon::MI('face');
 
-    echo Camon::fontawesome('search');
-    echo Camon::glyphicon('search');
-    echo Camon::ionicon('search');
-    echo Camon::octicon('search');
+**Options**
 
-**Arias**
+    // Specific tag
+    echo Camon::FA('home')->tag('span');
 
-    echo Camon::FA('search');	// fontawesome('search')
-    echo Camon::GL('search');	// glyphicon('search')
-    echo Camon::ION('search');	// ionicon('search')
-    echo Camon::OCT('search');	// octicon('search')
+    // Additional Class
+    echo Camon::FA('home', ['class' => 'text-success']);
 
-**Additional**
+    // Specific Property
+    echo Camon::FA('home', ['id' => 'id']);
 
-    // changing tag to span
-    echo Camon::fontawesome('search')->tag('span');
+    // Without After-Spacing
 
-    // with additional class
-    echo Camon::fontawesome('search', array(
-    	'class' => 'text-success'
-    ));
+    echo Camon::FA('home', [], false);
 
-    // with additional id
-    echo Camon::glyphicon('search', array(
-    	'id' => 'id'
-    ));
+    // Multiply
+    echo Camon::FA('home', [
+    	'id' => 'your-id-name', 
+    	'class' => 'your-class-name'
+    ], false);
 
-    // disabled after-spacing
+**After-Spacing**
 
-    echo Camon::ionicon('search', array(), false);
+    echo Camon::FA('home')->space();	// without space
+    echo Camon::FA('home')->space('left');
+    echo Camon::FA('home')->space('right');
+    echo Camon::FA('home')->space('both');
 
-    // with All
-    echo Camon::octicon('search', array(				
-    	'id' => 'glyphicon', 
-    	'class' => 'text-success'
-    ), false);
-		
 **CDN**
 
     echo Camon::cdn('fontawesome');
-    echo Camon::cdn('glyphicons', $version = '3.0.0');
-    echo Camon::cdn('ionicons', $version = '1.5.2', $tag = true);
-    echo Camon::cdn('octicons', $version = '2.1.2', $tag = false);	// Only URL
+    echo Camon::cdn('fontawesome', $version = '4.4.0');
+    echo Camon::cdn('fontawesome', $version = '4.4.0', $tag = true);
+    echo Camon::cdn('fontawesome', $version = '4.4.0', $tag = false);	// Only URL
+    
+* Parameter for cdn can be `fontawesome`, `glyphicons`, `ionicons`, `octicons`, `foundation` and `material-icons`.  
 
-**Search icon**
+Note: material-icons doesn't have version as of 10 Aug, 2015.
 
-If you'd like to find specific icons, the following page is really useful!
-http://glyphsearch.com/
+How to search icons
+====
+
+Try the below. Really useful!  
+  
+* [GlyphSearch](http://glyphsearch.com/)
+
+License
+====
+
+This package is licensed under the MIT License.
+
+Copyright 2014 Sukohi Kuhoh
