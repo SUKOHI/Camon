@@ -1,21 +1,18 @@
 {
     "name": "sukohi/camon",
-    "description": "A PHP package mainly developed for Laravel to generate icon fonts like font-awesome, glyphicons, ionicons and octicions.",
+    "description": "A PHP package mainly developed for Laravel to generate icon fonts like Font-Awesome, Glyphicons, Ionicons, Octicions, Foundation and Material-Icons.",
     "authors": [
         {
             "name": "Sukohi",
             "email": "capilano.sukohi@gmail.com"
         }
     ],
+    "license": "MIT",
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "4.2.*"
+        "laravel/framework": "~5.0"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
-        "psr-0": {
+        "psr-4": {
             "Sukohi\\Camon\\": "src/"
         }
     },
