@@ -18,7 +18,7 @@ class CamonServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('sukohi/camon');
+		$this->package('whoops-report/camon');
 	}
 
 	/**
