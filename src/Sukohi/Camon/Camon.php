@@ -240,7 +240,7 @@ class Camon {
 
 			case 'material-icons':
 				if(empty($version)) $version = '2.2.0';
-				$url = '////cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/'. $version .'/css/material-design-iconic-font.min.css';
+				$url = '//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/'. $version .'/css/material-design-iconic-font.min.css';
 				break;
 				
 		}
