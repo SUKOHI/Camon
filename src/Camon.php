@@ -210,26 +210,26 @@ class Camon {
 	public static function cdn($icon, $version = '', $tag = true) {
 		
 		$url = '';
-		
+
 		switch ($icon) {
-			
+
 			case 'fontawesome':
-				if(empty($version)) $version = '4.4.0';
+				if(empty($version)) $version = '4.5.0';
 				$url = '//maxcdn.bootstrapcdn.com/font-awesome/'. $version .'/css/font-awesome.min.css';
 				break;
-			
+
 			case 'glyphicons':
-				if(empty($version)) $version = '3.3.5';
-				$url = '//netdna.bootstrapcdn.com/bootstrap/'. $version .'/css/bootstrap-glyphicons.css';
+				if(empty($version)) $version = '3.3.6';
+				$url = '//maxcdn.bootstrapcdn.com/bootstrap/'. $version .'/css/bootstrap.min.css';
 				break;
 
 			case 'ionicons':
-				if(empty($version)) $version = '1.0.1';
-				$url = '//code.ionicframework.com/'. $version .'/css/ionic.min.css';
+				if(empty($version)) $version = '2.0.1';
+				$url = '//code.ionicframework.com/ionicons/'. $version .'/css/ionicons.min.css';
 				break;
-			
+
 			case 'octicons':
-				if(empty($version)) $version = '2.1.2';
+				if(empty($version)) $version = '3.4.1';
 				$url = '//cdnjs.cloudflare.com/ajax/libs/octicons/'. $version .'/octicons.min.css';
 				break;
 
@@ -239,9 +239,10 @@ class Camon {
 				break;
 
 			case 'material-icons':
-				$url = '//fonts.googleapis.com/icon?family=Material+Icons';
+				if(empty($version)) $version = '2.2.0';
+				$url = '//cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/'. $version .'/css/material-design-iconic-font.min.css';
 				break;
-				
+
 		}
 		
 		if(!$tag) {

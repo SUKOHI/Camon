@@ -8,7 +8,7 @@ A PHP package mainly developed for Laravel to generate icon fonts like the below
 * [Glyphicons](http://glyphicons.com/)
 * [Ionicons](http://ionicons.com/)
 * [Octicons](https://octicons.github.com/)
-* [Foundation](http://zurb.com/playground/foundation-icon-fonts-3)
+* [Foundation Icon Fonts](http://zurb.com/playground/foundation-icon-fonts-3)
 * [Material Icons](http://google.github.io/material-design-icons/)
 
 ![Imgur](http://i.imgur.com/FTOCIwy.png)
@@ -55,7 +55,7 @@ Usage
     // Octicons
     echo \Camon::OCT('home');
     
-    // Foundation
+    // Foundation Icon Fonts
     echo \Camon::FI('home');
     
     // Material Icons
